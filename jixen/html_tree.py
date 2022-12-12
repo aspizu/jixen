@@ -13,10 +13,9 @@ class Js(str, Node):
     """Represents inline javascript code"""
 
     def __repr__(self) -> str:
-        return f"Js({super().__repr__()})"
+        return f"Js({self})"
 
     def to_js(self, alias: Optional[str]) -> str:
-        _ = alias
         return self
 
 
@@ -29,9 +28,9 @@ class Attr(Node):
 
     def to_js(self, alias: Optional[str]) -> str:
         if self.name == "class":
-            return f"{alias}.classList.add({self.value});"
+            return f"{alias}.classList={self.value};"
         if self.name.startswith("on"):
-            return f"{alias}.addEventListener('{self.name[2:]}', ()=>{{{self.value}}});"
+            return f"{alias}.addEventListener('{self.name[2:]}',()=>{{{self.value}}});"
         else:
             return f"{alias}.{self.name}={self.value};"
 
@@ -46,7 +45,6 @@ class Element(Node):
     children: list[Union[Node, str]]
 
     def to_js(self, alias: Optional[str] = None) -> str:
-        _ = alias
         code: list[str] = []
         for child in self.children:
             if isinstance(child, Node):
