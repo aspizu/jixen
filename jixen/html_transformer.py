@@ -1,12 +1,16 @@
 from typing import Any
 
-from html_tree import Attr, Element, Js
+from html_parser import html_parser
+from html_tree import Attr, Element, Js, Text
 from lark import Token, Transformer
 
 
 class HTMLTransformer(Transformer[Token, Element]):
     def start(self, args: list[Any]) -> Element:
         return args[0]
+
+    def STRING(self, token: Token) -> str:
+        return Text(str(token)[1:-1])
 
     def tag(self, args: list[Any]) -> Element:
         if args[0].children[0] != args[-1].children[0]:
@@ -26,3 +30,7 @@ class HTMLTransformer(Transformer[Token, Element]):
 
     def js_(self, args: list[Any]) -> str:
         return "{" + "".join(args) + "}"
+
+
+def html_to_tree(html: str) -> Element:
+    return HTMLTransformer().transform(html_parser.parse(html))

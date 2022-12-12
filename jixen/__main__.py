@@ -2,12 +2,11 @@ import sys
 from pathlib import Path
 from typing import TextIO
 
-from html_parser import html_parser
-from html_transformer import HTMLTransformer
+from html_transformer import html_to_tree
 
 
 def html_to_js(html: str) -> str:
-    return HTMLTransformer().transform(html_parser.parse(html)).to_js()
+    return html_to_tree(html).to_js()
 
 
 def process(input: TextIO, output: TextIO):
