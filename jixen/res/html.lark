@@ -1,0 +1,13 @@
+start   : tag
+tag     : opening (tag | js | STRING)* closing
+opening : "<" NAME [":"NAME] (attr)* ">"
+closing : "<" "/" NAME ">"
+attr    : NAME "=" (STRING | js)
+js      : js_
+js_     : "{" (/[^{}]+/|js_)* "}"
+
+NAME  : /[a-zA-Z][a-zA-Z0-9]*/
+
+%import common.ESCAPED_STRING -> STRING
+%import common.WS
+%ignore WS
