@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * @param {number} timestamp
  * @returns {Date}
