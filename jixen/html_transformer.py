@@ -12,7 +12,15 @@ class HTMLTransformer(Transformer[Token, Element]):
     def STRING(self, token: Token) -> str:
         return Text(str(token)[1:-1])
 
+    def FUNCTION(self, token: Token) -> Js:
+        return Js(token)
+
     def tag(self, args: list[Any]) -> Element:
+        if (
+            not isinstance(args[0].children[0], Js)
+            and args[0].children[0] != args[-1].children[0]
+        ):
+            raise Exception("TAG MISMATCH")
         return Element(
             name=args[0].children[0],
             alias=args[0].children[1] or "e",

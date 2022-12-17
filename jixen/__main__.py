@@ -36,7 +36,6 @@ def main():
         exit(1)
     input = sys.argv[1]
     output = sys.argv[2]
-
     if input == "-":
         input_file = sys.stdin
     else:
@@ -45,7 +44,6 @@ def main():
         output_file = sys.stdout
     else:
         output_file = Path(output).open("r")
-
     process(input_file, output_file)
 
 
