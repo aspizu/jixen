@@ -32,3 +32,6 @@ const v = (() => {
 })()
 document.body.append(v)
 ```
+
+## Documentation
+see [~/DOCS.md](DOCS.md)
