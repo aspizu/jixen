@@ -2,7 +2,7 @@
  * @param {number} timestamp
  * @returns {Date}
  */
-function dateFromEpoch(timestamp) {
+export function dateFromEpoch(timestamp) {
   const d = new Date(0)
   d.setUTCSeconds(timestamp)
   return d
@@ -11,7 +11,7 @@ function dateFromEpoch(timestamp) {
 /**
  * @param {string} url
  */
-async function get(url) {
+export async function get(url) {
   return await (await fetch(url)).json()
 }
 
@@ -19,7 +19,7 @@ async function get(url) {
  * @param {string} url
  * @param {object} json
  */
-async function post(url, json) {
+export async function post(url, json) {
   return await (
     await fetch(url, {
       method: 'POST',
@@ -34,7 +34,7 @@ async function post(url, json) {
  * @param {string} format
  * @returns {string}
  */
-function strftime(date, format) {
+export function strftime(date, format) {
   let out = ''
   for (let i = 0; i < format.length; i++) {
     if (format[i] == '%') {
