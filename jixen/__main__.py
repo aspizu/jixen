@@ -43,7 +43,7 @@ def main():
     if output == "-":
         output_file = sys.stdout
     else:
-        output_file = Path(output).open("r")
+        output_file = Path(output).open("w")
     process(input_file, output_file)
 
 
