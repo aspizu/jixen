@@ -1,6 +1,6 @@
 start   : tag
 tag     : opening (tag | js | STRING)* closing
-opening : "<" NAME [":"NAME] (attr)* ">"
+opening : "<" (NAME | js) [":"NAME] (attr)* ">"
 closing : "<" "/" NAME ">"
 attr    : NAME "=" (STRING | js)
 js      : js_

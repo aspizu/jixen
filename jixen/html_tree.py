@@ -38,25 +38,28 @@ class Attr(Node):
 
     def to_js(self, alias: Optional[str]) -> str:
         if self.name == "class":
-            return f"{alias}.classList={self.value.to_js(alias)};"
+            return f'{alias}.classList+=" "+{self.value.to_js(alias)};'
         if self.name.startswith("on"):
             return f'{alias}.addEventListener("{self.name[2:]}",()=>{{{self.value.to_js(alias)}}});'
         else:
-            return f"{alias}.{self.name}={self.value};"
+            return f"{alias}.{self.name}={self.value.to_js(alias)};"
 
 
 @dataclass
 class Element(Node):
     """Represents a HTML element"""
 
-    name: str  # Tag name of HTML element
+    name: Union[str, Js]  # Tag name of HTML element
     alias: str  # Variable name to be used instead of `e`
     attrs: list[Attr]  # list of HTML attributes
     children: list[Node]
 
     def to_js(self, alias: Optional[str] = None) -> str:
         code: list[str] = []
-        code.append(f'let {self.alias}=document.createElement("{self.name}");')
+        if isinstance(self.name, Js):
+            code.append(f"let {self.alias}={self.name};")
+        else:
+            code.append(f'let {self.alias}=document.createElement("{self.name}");')
         for child in self.children:
             code.append(f"{self.alias}.append({child.to_js(self.alias)});")
         for attr in self.attrs:

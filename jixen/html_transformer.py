@@ -13,8 +13,6 @@ class HTMLTransformer(Transformer[Token, Element]):
         return Text(str(token)[1:-1])
 
     def tag(self, args: list[Any]) -> Element:
-        if args[0].children[0] != args[-1].children[0]:
-            raise Exception("Tag mismatch")
         return Element(
             name=args[0].children[0],
             alias=args[0].children[1] or "e",

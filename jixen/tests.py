@@ -23,3 +23,6 @@ class TestHTMLParser(unittest.TestCase):
                 [Text("classname")],
             ),
         )
+
+
+x: int = '1'

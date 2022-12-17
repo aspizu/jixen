@@ -30,19 +30,23 @@ def process(input: TextIO, output: TextIO):
                 output.write(c)
 
 
-def main(input: Path, output: Path):
-    with input.open("r") as input_fp:
-        with output.open("w") as output_fp:
-            process(input_fp, output_fp)
-
-
-if __name__ == "__main__":
+def main():
     if len(sys.argv) < 3:
         print("Usage: jixen /path/to/input.js /path/to/output.js")
         exit(1)
-    input = Path(sys.argv[1])
-    output = Path(sys.argv[2])
-    if not input.is_file():
-        raise FileNotFoundError(input)
+    input = sys.argv[1]
+    output = sys.argv[2]
 
-    main(input, output)
+    if input == "-":
+        input_file = sys.stdin
+    else:
+        input_file = Path(input).open("r")
+    if output == "-":
+        output_file = sys.stdout
+    else:
+        output_file = Path(output).open("r")
+
+    process(input_file, output_file)
+
+
+main()
