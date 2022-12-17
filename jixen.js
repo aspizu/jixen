@@ -5,7 +5,7 @@
 function dateFromEpoch(timestamp) {
   const d = new Date(0)
   d.setUTCSeconds(timestamp)
-  return strftime(d, '%I:%M %p')
+  return d
 }
 
 /**
