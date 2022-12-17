@@ -1,4 +1,14 @@
 /**
+ * @param {number} timestamp
+ * @returns {Date}
+ */
+function dateFromEpoch(timestamp) {
+  const d = new Date(0)
+  d.setUTCSeconds(timestamp)
+  return strftime(d, '%I:%M %p')
+}
+
+/**
  * @param {string} url
  */
 async function get(url) {
