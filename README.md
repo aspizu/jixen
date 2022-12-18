@@ -2,6 +2,7 @@
 jixen is a pre-processor for JavaScript which converts inline HTML expressions into 
 actual JavaScript code which when executed will return the HTML element using the DOM 
 API.
+[![State-of-the-art Shitcode](https://img.shields.io/static/v1?label=State-of-the-art&message=Shitcode&color=7B5804)](https://github.com/trekhleb/state-of-the-art-shitcode)
 
 ## Usage
 **Install dependencies using pip**
