@@ -1,7 +1,6 @@
 import sys
 from pathlib import Path
-from typing import TextIO
-
+from typing import TextIO #xyz
 from html_transformer import html_to_tree
 
 
